@@ -1,0 +1,24 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Text To Word</title></head><body><p>&lt;!doctype html&gt;</p>
+<p>&lt;html lang="en"&gt;</p>
+<p>&lt;head&gt;</p>
+<p>&nbsp; &lt;meta charset="utf-8" /&gt;</p>
+<p>&nbsp; &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
+<p>&nbsp; &lt;title&gt;Service Booked &mdash; RS VoltCare&lt;/title&gt;</p>
+<p>&nbsp; &lt;style&gt;</p>
+<p>&nbsp; &nbsp; body{margin:0;display:grid;place-items:center;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,Roboto;</p>
+<p>&nbsp; &nbsp; &nbsp; background:#0b0b0c;color:#eaeaea}</p>
+<p>&nbsp; &nbsp; .card{background:#121316;border:1px solid #23252a;border-radius:22px;padding:28px;max-width:520px;width:92%;</p>
+<p>&nbsp; &nbsp; &nbsp; text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}</p>
+<p>&nbsp; &nbsp; .ok{font-size:46px;margin-bottom:8px}</p>
+<p>&nbsp; &nbsp; a{color:#ffd54d;text-decoration:none;font-weight:700}</p>
+<p>&nbsp; &lt;/style&gt;</p>
+<p>&lt;/head&gt;</p>
+<p>&lt;body&gt;</p>
+<p>&nbsp; &lt;div class="card"&gt;</p>
+<p>&nbsp; &nbsp; &lt;div class="ok"&gt;✅&lt;/div&gt;</p>
+<p>&nbsp; &nbsp; &lt;h1&gt;Service Booked&lt;/h1&gt;</p>
+<p>&nbsp; &nbsp; &lt;p&gt;Shukriya! Aapki request mil gayi hai. Hum jald hi aapko call/WhatsApp karenge.&lt;/p&gt;</p>
+<p>&nbsp; &nbsp; &lt;p&gt;&lt;a href="index.html"&gt;Back to Home&lt;/a&gt;&lt;/p&gt;</p>
+<p>&nbsp; &lt;/div&gt;</p>
+<p>&lt;/body&gt;</p>
+<p>&lt;/html&gt;</p></body></html>
