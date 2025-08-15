@@ -1,0 +1,65 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Text To Word</title></head><body><p>&lt;?php</p>
+<p>$toEmail = "youremail@example.com";</p>
+<p>$ownerNumbers = "91XXXXXXXXXX";</p>
+<p>$fast2smsApiKey = "YOUR_FAST2SMS_API_KEY";</p>
+<p>&nbsp;</p>
+<p>function clean($s) { return trim(filter_var($s, FILTER_SANITIZE_STRING)); }</p>
+<p>&nbsp;</p>
+<p>$name = clean($_POST['name'] ?? '');</p>
+<p>$phone = preg_replace('/\D+/', '', $_POST['phone'] ?? '');</p>
+<p>$email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);</p>
+<p>$service = clean($_POST['service'] ?? '');</p>
+<p>$address = clean($_POST['address'] ?? '');</p>
+<p>$message = clean($_POST['message'] ?? '');</p>
+<p>$source = clean($_POST['source'] ?? 'website');</p>
+<p>&nbsp;</p>
+<p>if(!$name || !$phone || !$service){</p>
+<p>&nbsp; http_response_code(422);</p>
+<p>&nbsp; echo "Required fields missing.";</p>
+<p>&nbsp; exit;</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>$subject = "New Service Booking &mdash; RS VoltCare";</p>
+<p>$body = "A new service has been booked.\n\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Name: $name\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Phone: $phone\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Email: $email\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Service: $service\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Address: $address\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Message: $message\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Source: $source\n"</p>
+<p>&nbsp; &nbsp; &nbsp; . "Time: " . date('Y-m-d H:i:s');</p>
+<p>&nbsp;</p>
+<p>$headers = "From: RS VoltCare &lt;no-reply@yourdomain.com&gt;\r\n";</p>
+<p>if ($email) { $headers .= "Reply-To: $email\r\n"; }</p>
+<p>&nbsp;</p>
+<p>@mail($toEmail, $subject, $body, $headers);</p>
+<p>&nbsp;</p>
+<p>if(!empty($fast2smsApiKey) &amp;&amp; strpos($ownerNumbers, '91') !== false){</p>
+<p>&nbsp; &nbsp; $sms = "New booking: $name, $phone, $service";</p>
+<p>&nbsp; &nbsp; $payload = array(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; "sender_id" =&gt; "TXTIND",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; "message" =&gt; $sms,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; "route" =&gt; "v3",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; "numbers" =&gt; $ownerNumbers</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; $ch = curl_init();</p>
+<p>&nbsp; &nbsp; curl_setopt_array($ch, array(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; CURLOPT_URL =&gt; "https://www.fast2sms.com/dev/bulkV2",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; CURLOPT_RETURNTRANSFER =&gt; true,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; CURLOPT_CUSTOMREQUEST =&gt; "POST",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; CURLOPT_POSTFIELDS =&gt; json_encode($payload),</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; CURLOPT_HTTPHEADER =&gt; array(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "authorization: $fast2smsApiKey",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "accept: */*",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "cache-control: no-cache",</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "content-type: application/json"</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ),</p>
+<p>&nbsp; &nbsp; ));</p>
+<p>&nbsp; &nbsp; $resp = curl_exec($ch);</p>
+<p>&nbsp; &nbsp; curl_close($ch);</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>header("Location: success.html");</p>
+<p>exit;</p>
+<p>?&gt;</p></body></html>
