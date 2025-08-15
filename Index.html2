@@ -1,0 +1,20 @@
+<form action="https://formsubmit.co/rselectrician9283@gmail.com" method="POST" onsubmit="showBookedMessage(event)">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="text" name="phone" placeholder="Your Phone" required>
+    <input type="text" name="service" placeholder="Service Needed" required>
+    <button type="submit">Book Service</button>
+</form>
+
+<p id="bookingMessage" style="display:none; color:green; font-weight:bold;">
+    ✅ Service Booked! Thank you for booking with us.
+</p>
+
+<script>
+function showBookedMessage(event) {
+    event.preventDefault(); // Form ko turant submit hone se roke
+    document.getElementById("bookingMessage").style.display = "block"; // Message show kare
+    setTimeout(() => {
+        event.target.submit(); // 1 second baad form submit kare
+    }, 1000);
+}
+</script>
